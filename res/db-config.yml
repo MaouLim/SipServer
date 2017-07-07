@@ -1,0 +1,8 @@
+{
+    "driver": "com.mysql.jdbc.Driver",
+    "url": "jdbc:mysql://127.0.0.1:3306/mydb",
+    "account": "ty",
+    "password": "3856",
+    "init_connections": 2,
+    "core_connections": 6,
+}

@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="jain-sip-1.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jain-sip-1.2/jain-sdp-1.0.1111.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jain-sip-1.2/jain-sip-api-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jain-sip-1.2/jain-sip-ri-1.2.1111.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jain-sip-1.2/jain-sip-sdp-1.2.1111.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jain-sip-1.2/jain-sip-tck-1.2.1111.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/jain-sip-1.2/jain-sdp-src-1.0.1111.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jain-sip-1.2/jain-sip-api-1.2-src.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jain-sip-1.2/jain-sip-src-1.2.1111.jar!/" />
+    </SOURCES>
+  </library>
+</component>
