@@ -1,4 +1,4 @@
-package bupt.database;
+package bupt.util;
 
 import net.sf.json.JSONObject;
 
@@ -33,6 +33,8 @@ public class Configuration {
 
         this.object = JSONObject.fromObject(json);
     }
+
+    public boolean containKey(Object key) { return object.containsKey(key); }
 
     /* get the value of the specific property */
     public Object get(String property) {

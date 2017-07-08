@@ -1,5 +1,7 @@
 package bupt.database;
 
+import bupt.util.Configuration;
+
 import java.lang.reflect.InvocationTargetException;
 
 /*

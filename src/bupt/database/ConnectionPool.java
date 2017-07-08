@@ -1,5 +1,7 @@
 package bupt.database;
 
+import bupt.util.Configuration;
+
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
