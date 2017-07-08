@@ -17,8 +17,9 @@ public abstract class SipAgent implements SipListener {
 
     private SipStack    sipStack    = null;
     private SipProvider sipProvider = null;
+    private String      transport   = UDP;
 
-    public SipAgent(String configURL, int localPort)
+    public SipAgent(String configURL, int localPort, String transport)
             throws InvalidArgumentException,
                    TransportNotSupportedException,
                    PeerUnavailableException,
@@ -26,16 +27,14 @@ public abstract class SipAgent implements SipListener {
                    TooManyListenersException {
 
         sipStack = SipFactoryHelper.getInstance().createSipStack(configURL);
-        ListeningPoint tcpPoint =
-                sipStack.createListeningPoint(sipStack.getIPAddress(), localPort, TCP);
-        ListeningPoint udpPoint =
-                sipStack.createListeningPoint(sipStack.getIPAddress(), localPort, UDP);
 
-        sipProvider = sipStack.createSipProvider(tcpPoint);
-        sipProvider.addSipListener(this);
+        ListeningPoint udpPoint =
+                sipStack.createListeningPoint(sipStack.getIPAddress(), localPort, transport);
 
         sipProvider = sipStack.createSipProvider(udpPoint);
         sipProvider.addSipListener(this);
+
+
     }
 
     public SipAgent(int localPort)
@@ -44,7 +43,7 @@ public abstract class SipAgent implements SipListener {
                    TooManyListenersException,
                    PeerUnavailableException,
                    ObjectInUseException {
-        this(SIP_CONFIG_URL, localPort);
+        this(SIP_CONFIG_URL, localPort, UDP);
     }
 
     public SipStack getSipStack() {
@@ -59,19 +58,27 @@ public abstract class SipAgent implements SipListener {
         return sipProvider.getListeningPoint(UDP).getPort();
     }
 
-    public ClientTransaction
-        sendRequestWithClientTransaction(Request request)
-            throws SipException {
-        ClientTransaction transaction = sipProvider.getNewClientTransaction(request);
-        transaction.sendRequest();
-        return transaction;
+    public String getTransport() {
+        return transport;
     }
 
-    public ServerTransaction
-        sendResponseForRequest(Request request, Response response)
-            throws SipException, InvalidArgumentException {
-        ServerTransaction transaction = sipProvider.getNewServerTransaction(request);
-        transaction.sendResponse(response);
-        return transaction;
+    public SipProvider getSipProvider() {
+        return sipProvider;
     }
+
+//    public ClientTransaction
+//        sendRequestWithClientTransaction(Request request)
+//            throws SipException {
+//        ClientTransaction transaction = sipProvider.getNewClientTransaction(request);
+//        transaction.sendRequest();
+//        return transaction;
+//    }
+//
+//    public ServerTransaction
+//        sendResponseForRequest(Request request, Response response)
+//            throws SipException, InvalidArgumentException {
+//        ServerTransaction transaction = sipProvider.getNewServerTransaction(request);
+//        transaction.sendResponse(response);
+//        return transaction;
+//    }
 }
