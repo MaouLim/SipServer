@@ -55,4 +55,5 @@ public class SipUserInfo implements AccountManager {
     public String getDomain() {
         return domain;
     }
+
 }
