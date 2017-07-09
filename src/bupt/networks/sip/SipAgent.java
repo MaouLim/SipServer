@@ -1,5 +1,7 @@
 package bupt.networks.sip;
 
+import bupt.util.Configuration;
+
 import javax.sip.*;
 import javax.sip.message.Request;
 import javax.sip.message.Response;
@@ -10,7 +12,7 @@ import java.util.TooManyListenersException;
  */
 public abstract class SipAgent implements SipListener {
 
-    public static final String SIP_CONFIG_URL = "res/sip-config.yml";
+    //public static final String SIP_CONFIG_URL = "res/sip-config.yml";
 
     public static final String TCP = "tcp";
     public static final String UDP = "udp";
@@ -19,35 +21,34 @@ public abstract class SipAgent implements SipListener {
     private SipProvider sipProvider = null;
     private String      transport   = UDP;
 
-    public SipAgent(String configURL, int localPort, String transport)
+    public SipAgent(Configuration configuration)
             throws InvalidArgumentException,
                    TransportNotSupportedException,
                    PeerUnavailableException,
                    ObjectInUseException,
                    TooManyListenersException {
 
-        sipStack = SipFactoryHelper.getInstance().createSipStack(configURL);
+        sipStack = SipFactoryHelper.getInstance().createSipStack(configuration);
 
-        ListeningPoint udpPoint =
+        int localPort = Integer.valueOf((String) configuration.get("LOCAL_PORT"));
+        this.transport = (String) configuration.get("TRANSPORT_PROTOCOL");
+
+        assert (0 <= localPort && localPort < 65536);
+        assert (TCP.equals(transport) || UDP.equals(transport));
+
+        ListeningPoint point =
                 sipStack.createListeningPoint(sipStack.getIPAddress(), localPort, transport);
 
-        sipProvider = sipStack.createSipProvider(udpPoint);
+        sipProvider = sipStack.createSipProvider(point);
         sipProvider.addSipListener(this);
-
-
-    }
-
-    public SipAgent(int localPort)
-            throws InvalidArgumentException,
-                   TransportNotSupportedException,
-                   TooManyListenersException,
-                   PeerUnavailableException,
-                   ObjectInUseException {
-        this(SIP_CONFIG_URL, localPort, UDP);
     }
 
     public SipStack getSipStack() {
         return sipStack;
+    }
+
+    public SipProvider getSipProvider() {
+        return sipProvider;
     }
 
     public String getAddress() {
@@ -55,15 +56,11 @@ public abstract class SipAgent implements SipListener {
     }
 
     public int getPort() {
-        return sipProvider.getListeningPoint(UDP).getPort();
+        return sipProvider.getListeningPoint(transport).getPort();
     }
 
     public String getTransport() {
         return transport;
-    }
-
-    public SipProvider getSipProvider() {
-        return sipProvider;
     }
 
 //    public ClientTransaction

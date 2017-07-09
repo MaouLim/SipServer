@@ -24,6 +24,11 @@ public class Endpoint {
         this.port = port;
     }
 
+    @Override
+    public String toString() {
+        return address + ":" + port;
+    }
+
     public String getAddress() {
         return address;
     }

@@ -31,33 +31,51 @@ public class SipFactoryHelper {
         return sipFactoryHelper;
     }
 
-    public AddressFactory getAddressFactory() throws PeerUnavailableException {
+    public AddressFactory getAddressFactory() {
         if (null == addressFactory) {
-            addressFactory = sipFactory.createAddressFactory();
+            try {
+                addressFactory = sipFactory.createAddressFactory();
+            }
+            catch (PeerUnavailableException ex) {
+                ex.printStackTrace();
+                return null;
+            }
         }
 
         return addressFactory;
     }
 
-    public HeaderFactory getHeaderFactory() throws PeerUnavailableException {
+    public HeaderFactory getHeaderFactory() {
         if (null == headerFactory) {
-            headerFactory = sipFactory.createHeaderFactory();
+            try {
+                headerFactory = sipFactory.createHeaderFactory();
+            }
+            catch (PeerUnavailableException ex) {
+                ex.printStackTrace();
+                return null;
+            }
         }
 
         return headerFactory;
     }
 
-    public MessageFactory getMessageFactory() throws PeerUnavailableException {
+    public MessageFactory getMessageFactory() {
         if (null == messageFactory) {
-            messageFactory = sipFactory.createMessageFactory();
+            try {
+                messageFactory = sipFactory.createMessageFactory();
+            }
+            catch (PeerUnavailableException ex) {
+                ex.printStackTrace();
+                return null;
+            }
         }
 
         return messageFactory;
     }
 
-    public SipStack createSipStack(String propertiesResource) throws PeerUnavailableException {
+    public SipStack createSipStack(Configuration configuration) throws PeerUnavailableException {
         return sipFactory.createSipStack(
-             SipConfigBuilder.readFrom(new Configuration(propertiesResource))
+             SipConfigBuilder.readFrom(configuration)
         );
     }
 

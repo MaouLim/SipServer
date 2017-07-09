@@ -2,6 +2,8 @@ package bupt.networks.sip;
 
 import bupt.util.Configuration;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Properties;
 
 /*
@@ -30,6 +32,17 @@ public class SipConfigBuilder {
                 PROPERTY_IP_ADDRESS,
                 (String) config.get(PROPERTY_IP_ADDRESS)
             );
+        }
+        else {
+            try {
+                properties.setProperty(
+                    PROPERTY_IP_ADDRESS,
+                    InetAddress.getLocalHost().getHostAddress()
+                );
+            }
+            catch (UnknownHostException ex) {
+                ex.printStackTrace();
+            }
         }
 
         if (config.containKey(PROPERTY_TRACE_LEVEL)) {

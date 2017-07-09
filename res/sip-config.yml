@@ -3,5 +3,8 @@
     "javax.sip.IP_ADDRESS": "127.0.0.1",
     "gov.nist.javax.sip.TRACE_LEVEL": "32",
     "gov.nist.javax.sip.SERVER_LOG": "server.log",
-    "gov.nist.javax.sip.DEBUG_LOG": "debug.log"
+    "gov.nist.javax.sip.DEBUG_LOG": "debug.log",
+    "USER_NAME": "BB",
+    "LOCAL_PORT": "12345",
+    "TRANSPORT_PROTOCOL": "udp"
 }
