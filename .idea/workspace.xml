@@ -2,42 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24c6742d-6f35-4c12-b6f9-95dc0127d71e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/bupt/database/ConnectionPool.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/bupt/database/DatabaseAccessor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/bupt/database/DatabaseAccessorFactory.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/bupt/database/Query.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/bupt/database/SoftConnection.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/bupt/database/Update.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/bupt/networks/Endpoint.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/bupt/networks/MessageProcessor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/bupt/networks/SipDemo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/bupt/networks/sip/SipAgent.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/bupt/networks/sip/SipConfigBuilder.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/bupt/networks/sip/SipFactoryHelper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/bupt/networks/sip/SipRequestBuilder.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/bupt/networks/sip/SipServlet.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/bupt/networks/sip/SipUserInfo$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/bupt/networks/sip/SipUserInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/bupt/sipchat/entities/Entity.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/bupt/sipchat/entities/Group.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/bupt/sipchat/entities/User.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/bupt/sipchat/message/MessageBase.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/bupt/util/Configuration.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/bupt/util/SimpleThreadPool.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/example/SipLayer.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/example/TextClient$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/example/TextClient$2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SipServer/example/TextClient.class" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/sip-config.yml" afterPath="$PROJECT_DIR$/res/sip-config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bupt/networks/Endpoint.java" afterPath="$PROJECT_DIR$/src/bupt/networks/Endpoint.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bupt/networks/sip/SipAOR.java" afterPath="$PROJECT_DIR$/src/bupt/networks/sip/SipAOR.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bupt/networks/sip/SipAgent.java" afterPath="$PROJECT_DIR$/src/bupt/networks/sip/SipAgent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bupt/networks/sip/SipConfigBuilder.java" afterPath="$PROJECT_DIR$/src/bupt/networks/sip/SipConfigBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bupt/networks/sip/SipFactoryHelper.java" afterPath="$PROJECT_DIR$/src/bupt/networks/sip/SipFactoryHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bupt/networks/sip/SipRequestBuilder.java" afterPath="$PROJECT_DIR$/src/bupt/networks/sip/SipRequestBuilder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bupt/networks/sip/SipUserAgent.java" afterPath="$PROJECT_DIR$/src/bupt/networks/sip/SipUserAgent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/textclient.txt" afterPath="$PROJECT_DIR$/textclient.txt" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -62,21 +29,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SipDemo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/bupt/networks/SipDemo.java">
+      <file leaf-file-name="SipConfigBuilder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/bupt/networks/sip/SipConfigBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
-              <folding />
+            <state relative-caret-position="-78">
+              <caret line="13" column="77" lean-forward="true" selection-start-line="13" selection-start-column="77" selection-end-line="13" selection-end-column="77" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SipUserAgent.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SipUserAgent.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/bupt/networks/sip/SipUserAgent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="717">
-              <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+            <state relative-caret-position="550">
+              <caret line="22" column="52" lean-forward="false" selection-start-line="22" selection-start-column="52" selection-end-line="22" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#806#807#0" expanded="true" />
@@ -86,44 +55,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SipRequestBuilder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/bupt/networks/sip/SipRequestBuilder.java">
+      <file leaf-file-name="SipAOR.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/bupt/networks/sip/SipAOR.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="50" column="24" lean-forward="false" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#createMessage#0;class#SipRequestBuilder#0" expanded="false" />
-                <element signature="e#2483#2494#0" expanded="true" />
-                <element signature="method#createRegister#0;class#SipRequestBuilder#0" expanded="false" />
-                <element signature="e#4257#4268#0" expanded="true" />
-                <element signature="method#createGeneralProperties#0;class#SipRequestBuilder#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TextClient.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/example/TextClient.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1092">
-              <caret line="43" column="25" lean-forward="false" selection-start-line="43" selection-start-column="25" selection-end-line="43" selection-end-column="25" />
+            <state relative-caret-position="105">
+              <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SipAOR.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/bupt/networks/sip/SipAOR.java">
+      <file leaf-file-name="SipRequestBuilder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/bupt/networks/sip/SipRequestBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="634">
-              <caret line="43" column="13" lean-forward="false" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
+            <state relative-caret-position="484">
+              <caret line="145" column="0" lean-forward="true" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#getIpAddress#0;class#SipAOR#0" expanded="false" />
-                <element signature="e#884#885#0" expanded="true" />
-                <element signature="e#939#940#0" expanded="true" />
-                <element signature="method#getSipAddress#0;class#SipAOR#0" expanded="false" />
+                <element signature="e#2483#2494#0" expanded="true" />
+                <element signature="e#4257#4268#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -141,14 +91,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Endpoint.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Endpoint.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/bupt/networks/Endpoint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="11" column="34" lean-forward="false" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
+            <state relative-caret-position="457">
+              <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sip-config.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/sip-config.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="22" lean-forward="false" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -342,6 +302,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="networks" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SipServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SipServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bupt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="networks" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sip" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -855,15 +841,16 @@
       <workItem from="1499418533826" duration="6883000" />
       <workItem from="1499475402553" duration="16623000" />
       <workItem from="1499572591359" duration="634000" />
-      <workItem from="1499575113679" duration="18671000" />
+      <workItem from="1499575113679" duration="18895000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66527000" />
+    <option name="totallyTimeSpent" value="66751000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="70" y="-8" width="1858" height="1096" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -880,7 +867,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14849833" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14849833" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32834226" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -944,13 +931,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/bupt/sipchat/message/MessageBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/json-lib-2.4-jdk15.jar!/net/sf/json/JSONObject.class" />
     <entry file="jar://D:/Java/jdk1.8.0_121/src.zip!/java/io/BufferedReader.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1142,28 +1122,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/bupt/networks/sip/SipConfigBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="13" column="77" lean-forward="true" selection-start-line="13" selection-start-column="77" selection-end-line="13" selection-end-column="77" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/bupt/util/Configuration.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
           <caret line="44" column="55" lean-forward="true" selection-start-line="44" selection-start-column="55" selection-end-line="44" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/sip-config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="6" column="22" lean-forward="false" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -1208,51 +1170,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/bupt/networks/sip/SipFactoryHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="768">
-          <caret line="68" column="28" lean-forward="false" selection-start-line="68" selection-start-column="28" selection-end-line="68" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/bupt/networks/sip/SipUserAgent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="717">
-          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#806#807#0" expanded="true" />
-            <element signature="e#835#836#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/bupt/networks/sip/SipServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/bupt/networks/sip/SipRequestBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="50" column="24" lean-forward="false" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#createMessage#0;class#SipRequestBuilder#0" expanded="false" />
-            <element signature="e#2483#2494#0" expanded="true" />
-            <element signature="method#createRegister#0;class#SipRequestBuilder#0" expanded="false" />
-            <element signature="e#4257#4268#0" expanded="true" />
-            <element signature="method#createGeneralProperties#0;class#SipRequestBuilder#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/bupt/networks/sip/SipAgent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
@@ -1268,10 +1185,9 @@
         <state relative-caret-position="634">
           <caret line="43" column="13" lean-forward="false" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="method#getIpAddress#0;class#SipAOR#0" expanded="false" />
-            <element signature="e#884#885#0" expanded="true" />
-            <element signature="e#939#940#0" expanded="true" />
+            <element signature="e#884#885#0" expanded="false" />
+            <element signature="e#939#940#0" expanded="false" />
             <element signature="method#getSipAddress#0;class#SipAOR#0" expanded="false" />
           </folding>
         </state>
@@ -1287,10 +1203,78 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/bupt/networks/Endpoint.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="11" column="34" lean-forward="false" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
+        <state relative-caret-position="457">
+          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/sip-config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="22" lean-forward="false" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bupt/networks/sip/SipServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bupt/networks/sip/SipFactoryHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="768">
+          <caret line="68" column="28" lean-forward="false" selection-start-line="68" selection-start-column="28" selection-end-line="68" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bupt/networks/sip/SipAOR.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bupt/networks/sip/SipConfigBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-78">
+          <caret line="13" column="77" lean-forward="true" selection-start-line="13" selection-start-column="77" selection-end-line="13" selection-end-column="77" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bupt/networks/sip/SipRequestBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="145" column="0" lean-forward="true" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2483#2494#0" expanded="true" />
+            <element signature="e#4257#4268#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bupt/networks/sip/SipUserAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="22" column="52" lean-forward="false" selection-start-line="22" selection-start-column="52" selection-end-line="22" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#806#807#0" expanded="true" />
+            <element signature="e#835#836#0" expanded="true" />
           </folding>
         </state>
       </provider>
