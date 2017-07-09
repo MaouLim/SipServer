@@ -19,22 +19,25 @@ public class SipRequestBuilder {
         this.sipAgent = sipAgent;
     }
 
-    public Request createRegister(SipUserInfo userInfo) {
-        Address from = sipFactoryHelper.getAddressFactory().createAddress(
-            "sip:" + userInfo.getUserName() + "@" + userInfo.getDomain()
-        );
-        from.setDisplayName(userInfo.getUserName());
-        Address to = sipFactoryHelper.getAddressFactory().createAddress(
-            "sip:" + userInfo.getUserName() + "@" + userInfo.getDomain()
-        );
-        to.setDisplayName(userInfo.getUserName());
+//    public Request createRegister(SipUserInfo userInfo) {
+//        Address from = sipFactoryHelper.getAddressFactory().createAddress(
+//            "sip:" + userInfo.getUserName() + "@" + userInfo.getDomain()
+//        );
+//        from.setDisplayName(userInfo.getUserName());
+//        Address to = sipFactoryHelper.getAddressFactory().createAddress(
+//            "sip:" + userInfo.getUserName() + "@" + userInfo.getDomain()
+//        );
+//        to.setDisplayName(userInfo.getUserName());
+//
+//        sipFactoryHelper.getAddressFactory().cre
+//
+//        Address contact = sipFactoryHelper.getAddressFactory().createAddress(
+//            "sip:" +userInfo.getUserName() + "@" +
+//        );
+//
+//    }
 
-        sipFactoryHelper.getAddressFactory().cre
-
-        Address contact = sipFactoryHelper.getAddressFactory().createAddress(
-            "sip:" +userInfo.getUserName() + "@" +
-        );
-
+    public Request createMessage(@NotNull String to, String content) {
+        return null;
     }
-
 }
