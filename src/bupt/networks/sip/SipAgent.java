@@ -12,8 +12,6 @@ import java.util.TooManyListenersException;
  */
 public abstract class SipAgent implements SipListener {
 
-    //public static final String SIP_CONFIG_URL = "res/sip-config.yml";
-
     public static final String TCP = "tcp";
     public static final String UDP = "udp";
 
@@ -21,30 +19,25 @@ public abstract class SipAgent implements SipListener {
     private SipProvider sipProvider = null;
     private String      transport   = UDP;
 
-    public SipAgent(Configuration configuration)
+    public SipAgent(Configuration sipConfig, int port, String transport)
             throws InvalidArgumentException,
                    TransportNotSupportedException,
                    PeerUnavailableException,
                    ObjectInUseException,
                    TooManyListenersException {
+        if ((port < 0 || 65535 < port) ||
+            (!TCP.equals(transport) && !UDP.equals(transport))) {
+            throw new InvalidArgumentException("invalid arg: " + port + ", " + transport);
+        }
 
-        sipStack = SipFactoryHelper.getInstance().createSipStack(configuration);
+        this.transport = transport;
 
-        int localPort = Integer.valueOf((String) configuration.get("LOCAL_PORT"));
-        this.transport = (String) configuration.get("TRANSPORT_PROTOCOL");
-
-        assert (0 <= localPort && localPort < 65536);
-        assert (TCP.equals(transport) || UDP.equals(transport));
-
+        this.sipStack = SipFactoryHelper.getInstance().createSipStack(sipConfig);
         ListeningPoint point =
-                sipStack.createListeningPoint(sipStack.getIPAddress(), localPort, transport);
+                sipStack.createListeningPoint(this.sipStack.getIPAddress(), port, this.transport);
 
-        sipProvider = sipStack.createSipProvider(point);
-        sipProvider.addSipListener(this);
-    }
-
-    public SipStack getSipStack() {
-        return sipStack;
+        this.sipProvider = this.sipStack.createSipProvider(point);
+        this.sipProvider.addSipListener(this);
     }
 
     public SipProvider getSipProvider() {

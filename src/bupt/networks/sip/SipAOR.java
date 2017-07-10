@@ -18,9 +18,14 @@ public class SipAOR {
 
     public SipAOR(String aor) {
         String[] splits = aor.split("@");
-        assert (2 == splits.length);
+        assert (2 == splits.length && splits[0].startsWith("sip:"));
         this.userName = splits[0].substring(splits[0].indexOf(':') + 1);
         this.domain = splits[1];
+    }
+
+    @Override
+    public String toString() {
+        return "sip:" + userName + "@" + domain;
     }
 
     public String getUserName() {
@@ -31,13 +36,16 @@ public class SipAOR {
         return domain;
     }
 
-    public String getIpAddress() {
-        int index = domain.indexOf(':');
-        return index < 0 ? domain : domain.substring(0, index);
-    }
+    public SipURI getSipServiceProviderURI() {
+        try {
+            return SipFactoryHelper.
+                    getInstance().getAddressFactory().createSipURI("", domain);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
-    public String getAOR() {
-        return "sip:" + userName + "@" + domain;
+        return null;
     }
 
     public SipURI getSipURI() {

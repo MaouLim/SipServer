@@ -1,4 +1,4 @@
-package bupt.networks;
+package example;
 
 public interface MessageProcessor
 {

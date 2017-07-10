@@ -1,7 +1,5 @@
 package example;
 
-import bupt.networks.MessageProcessor;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -41,7 +39,7 @@ public class TextClient
             String username = args[0];
             int port = Integer.parseInt(args[1]);
             String ip = InetAddress.getLocalHost().getHostAddress();
-            ip = args[2];
+            //ip = args[2];
 
             SipLayer sipLayer = new SipLayer(username, ip, port);
             TextClient tc = new TextClient(sipLayer);

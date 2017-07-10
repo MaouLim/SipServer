@@ -1,8 +1,5 @@
 package example;
 
-import bupt.networks.MessageProcessor;
-
-import java.net.InetAddress;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -94,17 +91,19 @@ public class SipLayer implements SipListener {
     public void sendMessage(String to, String message) throws ParseException,
             InvalidArgumentException, SipException {
 
-        SipURI from = addressFactory.createSipURI(getUsername(), getHost()
-                + ":" + getPort());
+        //SipURI from = addressFactory.createSipURI(getUsername(), getHost()
+        //       + ":" + getPort());
+        SipURI from = addressFactory.createSipURI(getUsername(), GetHost());
         Address fromNameAddress = addressFactory.createAddress(from);
         fromNameAddress.setDisplayName(getUsername());
+        //fromNameAddress.setDisplayName("AA");
         FromHeader fromHeader = headerFactory.createFromHeader(fromNameAddress,
                 "textclientv1.0");
 
         String username = to.substring(to.indexOf(":") + 1, to.indexOf("@"));
         String address = to.substring(to.indexOf("@") + 1);
 
-        SipURI toAddress = addressFactory.createSipURI(username, address);
+        SipURI toAddress = addressFactory.createSipURI(username, /*address*/"there.com");
         Address toNameAddress = addressFactory.createAddress(toAddress);
         toNameAddress.setDisplayName(username);
         ToHeader toHeader = headerFactory.createToHeader(toNameAddress, null);
@@ -173,6 +172,9 @@ public class SipLayer implements SipListener {
         }
 
         FromHeader from = (FromHeader) req.getHeader("From");
+
+        System.out.println(req.toString());
+
         messageProcessor.processMessage(from.getAddress().toString(),
                 new String(req.getRawContent()));
         Response response = null;
@@ -247,4 +249,7 @@ public class SipLayer implements SipListener {
         messageProcessor = newMessageProcessor;
     }
 
+    public String GetHost() {
+        return getUsername().equals("aa") ? "here.com" : "there.com";
+    }
 }

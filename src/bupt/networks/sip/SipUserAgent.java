@@ -10,24 +10,30 @@ import java.util.TooManyListenersException;
  */
 public abstract class SipUserAgent extends SipAgent {
 
-    private SipAOR sipAOR = null;
+    private SipContactAOR contactAOR = null;
 
-    public SipUserAgent(Configuration configuration)
+    public SipUserAgent(Configuration sipConfig,
+                        SipContactAOR contactAOR,
+                        String transport)
             throws InvalidArgumentException,
                    TransportNotSupportedException,
                    PeerUnavailableException,
                    ObjectInUseException,
                    TooManyListenersException {
-        super(configuration);
-        sipAOR = new SipAOR(
-            (String) configuration.get("USER_NAME"),
-            (String) (configuration.get("javax.sip.IP_ADDRESS") + ":" + configuration.get("LOCAL_PORT"))
-        );
+        super(sipConfig, contactAOR.getPort(), transport);
+
+        if (!super.getAddress().equals(contactAOR.getAddress())) {
+            throw new InvalidArgumentException("the contactAOR doesn't match to this sipAgent");
+        }
+
+        this.contactAOR = contactAOR;
     }
 
     public SipAOR getSipAOR() {
-        return sipAOR;
+        return contactAOR.getSipAOR();
     }
 
-
+    public SipContactAOR getContactAOR() {
+        return contactAOR;
+    }
 }
