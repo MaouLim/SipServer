@@ -12,11 +12,11 @@ public interface SipProcessor {
     void processPublish(RequestEvent requestEvent);
     void processNotifier(RequestEvent requestEvent);
     void processSubscribe(RequestEvent requestEvent);
-    void processOK(RequestEvent requestEvent);
 
     void processResponse(ResponseEvent responseEvent);
 
     void processTimeout(TimeoutEvent timeoutEvent);
     void processIOException(IOExceptionEvent exceptionEvent);
     void processTransactionTerminated(TransactionTerminatedEvent transactionTerminatedEvent);
+    void processDialogTerminated(DialogTerminatedEvent dialogTerminatedEvent);
 }

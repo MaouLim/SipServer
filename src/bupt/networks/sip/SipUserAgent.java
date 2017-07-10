@@ -16,7 +16,7 @@ public abstract class SipUserAgent extends SipAgent {
 
     public SipUserAgent(Configuration sipConfig,
                         SipContactAOR contactAOR,
-                        String transport)
+                        String        transport)
             throws InvalidArgumentException,
                    TransportNotSupportedException,
                    PeerUnavailableException,
@@ -33,6 +33,10 @@ public abstract class SipUserAgent extends SipAgent {
 
     public SipRequestBuilder createRequestBuilder() {
         return new SipRequestBuilder(this);
+    }
+
+    public SipResponseBuilder createResponseBuilder() {
+        return new SipResponseBuilder(this);
     }
 
     public SipAOR getSipAOR() {

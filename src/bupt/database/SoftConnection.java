@@ -13,7 +13,7 @@ public class SoftConnection {
     private Connection     connection = null;
 
     public SoftConnection(ConnectionPool pool,
-                          Connection connection) {
+                          Connection     connection) {
         assert (null != pool && null != connection);
 
         this.pool = pool;

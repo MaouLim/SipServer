@@ -36,18 +36,6 @@ public class SipAOR {
         return domain;
     }
 
-    public SipURI getSipServiceProviderURI() {
-        try {
-            return SipFactoryHelper.
-                    getInstance().getAddressFactory().createSipURI("", domain);
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-        return null;
-    }
-
     public SipURI getSipURI() {
         try {
             return SipFactoryHelper.

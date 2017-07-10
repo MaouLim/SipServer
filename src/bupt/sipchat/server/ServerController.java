@@ -3,30 +3,40 @@ package bupt.sipchat.server;
 import bupt.networks.sip.SipServer;
 import bupt.networks.sip.exceptions.InitFailureException;
 
+import javax.sip.DialogTerminatedEvent;
 import javax.sip.RequestEvent;
 import javax.sip.ResponseEvent;
 
 /*
  * Created by Maou Lim on 2017/7/10.
  */
-public class ChatServer extends SipServer {
+public class ServerController extends SipServer {
 
-    public static final String SIP_CONFIG_URL = "res/sip-config.yml";
+    public static final String SIP_CONFIG_URL    = "res/sip-config.yml";
     public static final String SERVER_CONFIG_URL = "res/server-config.yml";
 
-    private static ChatServer server = null;
+    private static ServerController server = null;
 
-    public static ChatServer getInstance() {
+    public static ServerController getInstance() {
+        if (null == server) {
+            try {
+                server = new ServerController();
+            }
+            catch (InitFailureException ex) {
+                ex.printStackTrace();
+                return null;
+            }
+        }
         return null;
     }
 
-    private ChatServer() throws InitFailureException {
+    private ServerController() throws InitFailureException {
         super(SIP_CONFIG_URL, SERVER_CONFIG_URL);
     }
 
     @Override
     public void processMessage(RequestEvent requestEvent) {
-        
+
     }
 
     @Override
@@ -50,12 +60,12 @@ public class ChatServer extends SipServer {
     }
 
     @Override
-    public void processOK(RequestEvent requestEvent) {
+    public void processResponse(ResponseEvent responseEvent) {
 
     }
 
     @Override
-    public void processResponse(ResponseEvent responseEvent) {
+    public void processDialogTerminated(DialogTerminatedEvent dialogTerminatedEvent) {
 
     }
 }
