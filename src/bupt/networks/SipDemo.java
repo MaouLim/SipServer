@@ -24,6 +24,8 @@ public class SipDemo {
         SipContactAOR  contactAOR =
                 new SipContactAOR(name, InetAddress.getLocalHost().getHostAddress(), port, sipAOR);
 
+        System.out.println("local: " + contactAOR.getAddress() + ":" + contactAOR.getPort());
+
         SipUserAgent userAgent = new SipUserAgent(configuration, contactAOR, SipAgent.UDP) {
 
             @Override
@@ -40,22 +42,22 @@ public class SipDemo {
 
             @Override
             public void processTimeout(TimeoutEvent timeoutEvent) {
-                System.out.println("timeout");
+                System.err.println("timeout");
             }
 
             @Override
             public void processIOException(IOExceptionEvent exceptionEvent) {
-                System.out.println("exception");
+                System.err.println("exception");
             }
 
             @Override
             public void processTransactionTerminated(TransactionTerminatedEvent transactionTerminatedEvent) {
-                System.out.println("processTransactionTerminated");
+                System.err.println("processTransactionTerminated");
             }
 
             @Override
             public void processDialogTerminated(DialogTerminatedEvent dialogTerminatedEvent) {
-                System.out.println("processDialogTerminated");
+                System.err.println("processDialogTerminated");
             }
         };
 
@@ -70,6 +72,7 @@ public class SipDemo {
             toContact.attachTo(to);
 
             userAgent.getSipProvider().sendRequest(builder.createMessage(toContact, "nihao"));
+            //ClientTransaction = userAgent.sendRequest(builder.createMessage(toContact, "nihao"));
         }
 
     }

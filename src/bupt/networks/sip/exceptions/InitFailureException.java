@@ -5,4 +5,12 @@ package bupt.networks.sip.exceptions;
  */
 public class InitFailureException extends Exception {
 
+    public InitFailureException(String message) {
+        super(message);
+    }
+
+    public InitFailureException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
 }

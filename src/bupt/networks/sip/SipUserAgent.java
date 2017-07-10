@@ -3,6 +3,8 @@ package bupt.networks.sip;
 import bupt.util.Configuration;
 
 import javax.sip.*;
+import javax.sip.message.Request;
+import javax.sip.message.Response;
 import java.util.TooManyListenersException;
 
 /*
@@ -29,6 +31,10 @@ public abstract class SipUserAgent extends SipAgent {
         this.contactAOR = contactAOR;
     }
 
+    public SipRequestBuilder createRequestBuilder() {
+        return new SipRequestBuilder(this);
+    }
+
     public SipAOR getSipAOR() {
         return contactAOR.getSipAOR();
     }
@@ -37,7 +43,26 @@ public abstract class SipUserAgent extends SipAgent {
         return contactAOR;
     }
 
-    public SipRequestBuilder createRequestBuilder() {
-        return new SipRequestBuilder(this);
+    public void sendRequest(Request request) throws SipException {
+        getSipProvider().sendRequest(request);
     }
+
+    public ClientTransaction sendRequestByTransaction(Request request)
+            throws SipException {
+        ClientTransaction transaction = getSipProvider().getNewClientTransaction(request);
+        transaction.sendRequest();
+        return transaction;
+    }
+
+    public void sendResponse(Response response) throws SipException {
+        getSipProvider().sendResponse(response);
+    }
+
+    public ServerTransaction sendResponseByTransaction(Request request, Response response)
+            throws SipException, InvalidArgumentException {
+        ServerTransaction transaction = getSipProvider().getNewServerTransaction(request);
+        transaction.sendResponse(response);
+        return transaction;
+    }
+
 }

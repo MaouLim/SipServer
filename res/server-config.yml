@@ -1,0 +1,6 @@
+{
+    "server_name": "",
+    "server_domain": "dd.dev.com",
+    "server_port": 5060,
+    "server_transport": "udp"
+}

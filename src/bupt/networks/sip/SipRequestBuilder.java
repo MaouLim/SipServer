@@ -82,7 +82,10 @@ public class SipRequestBuilder {
         return request;
     }
 
-    public Request createRegister() throws Exception {
+    /**
+     * @param expires for how long to register the current sip contact AOR
+     */
+    public Request createRegister(int expires) throws Exception {
         //SipAOR selfAOR = sipUserAgent.getSipAOR();
         SipContactAOR selfContactAOR = sipUserAgent.getContactAOR();
 
@@ -120,7 +123,7 @@ public class SipRequestBuilder {
         );
 
         ContactHeader contactHeader = headerFactory.createContactHeader(contact);
-        ExpiresHeader expiresHeader = headerFactory.createExpiresHeader(3600);
+        ExpiresHeader expiresHeader = headerFactory.createExpiresHeader(expires);
 
         request.addHeader(contactHeader);
         request.addHeader(expiresHeader);
@@ -128,6 +131,9 @@ public class SipRequestBuilder {
         return request;
     }
 
+    /**
+     * @param event for the name of the event to subscribe
+     */
     public Request createSubscribe(@NotNull SipContactAOR targetContactAOR, String event) throws Exception {
         SipContactAOR selfContactAOR = sipUserAgent.getContactAOR();
 

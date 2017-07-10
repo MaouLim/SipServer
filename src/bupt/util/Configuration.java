@@ -19,6 +19,10 @@ public class Configuration {
 
     private JSONObject object = null;
 
+    public Configuration() {
+        object = new JSONObject();
+    }
+
     public Configuration(String url) {
         String json = null;
 
