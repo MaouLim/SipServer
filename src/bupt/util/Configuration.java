@@ -32,6 +32,7 @@ public class Configuration {
         }
 
         this.object = JSONObject.fromObject(json);
+
     }
 
     public boolean containKey(Object key) { return object.containsKey(key); }

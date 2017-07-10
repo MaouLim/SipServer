@@ -36,4 +36,8 @@ public abstract class SipUserAgent extends SipAgent {
     public SipContactAOR getContactAOR() {
         return contactAOR;
     }
+
+    public SipRequestBuilder createRequestBuilder() {
+        return new SipRequestBuilder(this);
+    }
 }

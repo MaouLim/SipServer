@@ -2,6 +2,11 @@
   <library name="json-lib-2.4">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/json-lib-2.4/json-lib-2.4-jdk15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/json-lib-2.4/commons-lang-2.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/json-lib-2.4/commons-beanutils-1.8.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/json-lib-2.4/commons-collections-3.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/json-lib-2.4/commons-logging-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/json-lib-2.4/ezmorph-1.0.6.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
