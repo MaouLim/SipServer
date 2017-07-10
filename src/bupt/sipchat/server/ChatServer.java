@@ -14,6 +14,11 @@ public class ChatServer extends SipServer {
     public static final String SIP_CONFIG_URL = "res/sip-config.yml";
     public static final String SERVER_CONFIG_URL = "res/server-config.yml";
 
+    private static ChatServer server = null;
+
+    public static ChatServer getInstance() {
+        return null;
+    }
 
     private ChatServer() throws InitFailureException {
         super(SIP_CONFIG_URL, SERVER_CONFIG_URL);
@@ -21,7 +26,7 @@ public class ChatServer extends SipServer {
 
     @Override
     public void processMessage(RequestEvent requestEvent) {
-
+        
     }
 
     @Override
