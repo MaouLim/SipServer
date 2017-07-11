@@ -3,27 +3,35 @@ package bupt.sipchat.client;
 import bupt.networks.sip.*;
 import bupt.networks.sip.exceptions.InitFailureException;
 import bupt.util.Configuration;
+import com.sun.istack.internal.NotNull;
 
 import javax.sip.*;
 import javax.sip.message.Request;
-import javax.sip.message.Response;
+import java.util.concurrent.ConcurrentHashMap;
 
 /*
  * Created by Maou Lim on 2017/7/10.
  */
-public class ClientController implements SipProcessor {
+public class ClientController implements SipProcessor, ChatClientService {
+
+    public static final String INVITE_TO_CHAT = "INVITE_TO_CHAT";
 
     private SipUserAgent       userAgent          = null;
     private ClientTransaction  currentTransaction = null;
     private Dialog             currentDialog      = null;
     private SipRequestBuilder  requestBuilder     = null;
     private SipResponseBuilder responseBuilder    = null;
+    private SipContactAOR      serverAOR          = null;
 
-    public ClientController(Configuration sipConfig,
-                            SipContactAOR contactAOR,
-                            String        transport) throws InitFailureException {
+    private ConcurrentHashMap<Long, ClientTransaction> clientTransactionMap = null;
+    private ConcurrentHashMap<Long, ServerTransaction> serverTransactionMap = null;
+
+    public ClientController(@NotNull Configuration sipConfig,
+                            @NotNull SipContactAOR selfAOR,
+                            @NotNull SipContactAOR serverAOR,
+                            @NotNull String        transport) throws InitFailureException {
         try {
-            userAgent = new SipUserAgent(sipConfig, contactAOR, transport) {
+            userAgent = new SipUserAgent(sipConfig, selfAOR, transport) {
 
                 @Override
                 public void processRequest(RequestEvent requestEvent) {
@@ -75,7 +83,9 @@ public class ClientController implements SipProcessor {
                 }
             };
 
-            responseBuilder = userAgent.createResponseBuilder();
+            this.responseBuilder = userAgent.createResponseBuilder();
+            this.requestBuilder = userAgent.createRequestBuilder();
+            this.serverAOR = serverAOR;
         }
         catch (Exception ex) {
             throw new InitFailureException("failed to init sipUserAgent", ex);
@@ -149,5 +159,51 @@ public class ClientController implements SipProcessor {
     @Override
     public void processDialogTerminated(DialogTerminatedEvent dialogTerminatedEvent) {
         // todo
+    }
+
+    @Override
+    public void login(String userName, String password) {
+
+    }
+
+    @Override
+    public void inviteToChat(String inviteeAOR) {
+        try {
+            // send invite to server to ask for the address of the invitee's address
+            Request request = requestBuilder.createInvite(serverAOR, INVITE_TO_CHAT, inviteeAOR);
+            ClientTransaction transaction = userAgent.sendRequestByTransaction(request);
+            clientTransactionMap.put(SipRequestBuilder.getRequestCSeq(request), transaction);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void sendMessage(String contactURI, String content) {
+        try {
+            // send message to
+            Request request = requestBuilder.createMessage(new SipContactAOR(contactURI), content);
+            ClientTransaction transaction = userAgent.sendRequestByTransaction(request);
+            clientTransactionMap.put(SipRequestBuilder.getRequestCSeq(request), transaction);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void createChannel(String channelId) {
+
+    }
+
+    @Override
+    public void subscribeChannel(String channelId) {
+
+    }
+
+    @Override
+    public void publishToChannel(String channelId, String statusInfo) {
+
     }
 }

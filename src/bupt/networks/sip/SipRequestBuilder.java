@@ -9,11 +9,14 @@ import javax.sip.header.*;
 import javax.sip.message.Request;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 /*
  * Created by Maou Lim on 2017/7/8.
  */
 public class SipRequestBuilder {
+
+    private static final AtomicLong sequence = new AtomicLong(0);
 
     private static SipFactoryHelper sipFactoryHelper = SipFactoryHelper.getInstance();
     private static AddressFactory addressFactory = sipFactoryHelper.getAddressFactory();
@@ -26,7 +29,9 @@ public class SipRequestBuilder {
         this.sipUserAgent = sipUserAgent;
     }
 
-    public Request createInvite(@NotNull SipContactAOR targetContactAOR, String action) throws Exception {
+    public Request createInvite(@NotNull SipContactAOR targetContactAOR,
+                                @NotNull String        action,
+                                @NotNull String        args) throws Exception {
         SipContactAOR selfContactAOR = sipUserAgent.getContactAOR();
 
         FromHeader fromHeader = headerFactory.createFromHeader(
@@ -53,9 +58,9 @@ public class SipRequestBuilder {
         CallIdHeader callIdHeader = sipUserAgent.getSipProvider().getNewCallId();
         MaxForwardsHeader maxForwardsHeader = headerFactory.createMaxForwardsHeader(70);
         CSeqHeader cSeqHeader =
-                headerFactory.createCSeqHeader(1l, Request.INVITE);
+                headerFactory.createCSeqHeader(sequence.getAndIncrement(), Request.INVITE);
         ContentTypeHeader contentTypeHeader =
-                headerFactory.createContentTypeHeader("application", "action");
+                headerFactory.createContentTypeHeader("application", action);
 
         final Request request = sipFactoryHelper.getMessageFactory().createRequest(
                 requestURI, Request.INVITE, callIdHeader, cSeqHeader,
@@ -63,7 +68,7 @@ public class SipRequestBuilder {
         );
 
         request.addHeader(contactHeader);
-        request.setContent(action, contentTypeHeader);
+        request.setContent(args, contentTypeHeader);
 
         return request;
     }
@@ -95,7 +100,7 @@ public class SipRequestBuilder {
         CallIdHeader callIdHeader = sipUserAgent.getSipProvider().getNewCallId();
         MaxForwardsHeader maxForwardsHeader = headerFactory.createMaxForwardsHeader(70);
         CSeqHeader cSeqHeader =
-                headerFactory.createCSeqHeader(1l, Request.BYE);
+                headerFactory.createCSeqHeader(sequence.getAndIncrement(), Request.BYE);
 
         final Request request = sipFactoryHelper.getMessageFactory().createRequest(
                 requestURI, Request.BYE, callIdHeader, cSeqHeader,
@@ -134,7 +139,7 @@ public class SipRequestBuilder {
         CallIdHeader callIdHeader = sipUserAgent.getSipProvider().getNewCallId();
         MaxForwardsHeader maxForwardsHeader = headerFactory.createMaxForwardsHeader(70);
         CSeqHeader cSeqHeader =
-                headerFactory.createCSeqHeader(1l, Request.MESSAGE);
+                headerFactory.createCSeqHeader(sequence.getAndIncrement(), Request.MESSAGE);
 
         ContentTypeHeader contentTypeHeader =
                 headerFactory.createContentTypeHeader("text", "plain");
@@ -178,7 +183,7 @@ public class SipRequestBuilder {
         CallIdHeader callIdHeader = sipUserAgent.getSipProvider().getNewCallId();
         MaxForwardsHeader maxForwardsHeader = headerFactory.createMaxForwardsHeader(70);
         CSeqHeader cSeqHeader =
-                headerFactory.createCSeqHeader(1l, Request.REGISTER);
+                headerFactory.createCSeqHeader(sequence.getAndIncrement(), Request.REGISTER);
 
         final Request request = sipFactoryHelper.getMessageFactory().createRequest(
             uri, Request.REGISTER, callIdHeader, cSeqHeader,
@@ -229,7 +234,7 @@ public class SipRequestBuilder {
         CallIdHeader callIdHeader = sipUserAgent.getSipProvider().getNewCallId();
         MaxForwardsHeader maxForwardsHeader = headerFactory.createMaxForwardsHeader(70);
         CSeqHeader cSeqHeader =
-                headerFactory.createCSeqHeader(1l, Request.SUBSCRIBE);
+                headerFactory.createCSeqHeader(sequence.getAndIncrement(), Request.SUBSCRIBE);
 
         ContentTypeHeader contentTypeHeader =
                 headerFactory.createContentTypeHeader("text", "plain");
@@ -275,7 +280,7 @@ public class SipRequestBuilder {
         CallIdHeader callIdHeader = sipUserAgent.getSipProvider().getNewCallId();
         MaxForwardsHeader maxForwardsHeader = headerFactory.createMaxForwardsHeader(70);
         CSeqHeader cSeqHeader =
-                headerFactory.createCSeqHeader(1l, Request.NOTIFY);
+                headerFactory.createCSeqHeader(sequence.getAndIncrement(), Request.NOTIFY);
 
         ContentTypeHeader contentTypeHeader =
                 headerFactory.createContentTypeHeader("text", "plain");
@@ -322,7 +327,7 @@ public class SipRequestBuilder {
         CallIdHeader callIdHeader = sipUserAgent.getSipProvider().getNewCallId();
         MaxForwardsHeader maxForwardsHeader = headerFactory.createMaxForwardsHeader(70);
         CSeqHeader cSeqHeader =
-                headerFactory.createCSeqHeader(1l, Request.PUBLISH);
+                headerFactory.createCSeqHeader(sequence.getAndIncrement(), Request.PUBLISH);
 
         ContentTypeHeader contentTypeHeader =
                 headerFactory.createContentTypeHeader("text", "plain");
@@ -341,6 +346,16 @@ public class SipRequestBuilder {
         request.addHeader(routeHeader);
 
         return request;
+    }
+
+    public static long getRequestCSeq(Request request) {
+        CSeqHeader cSeqHeader = (CSeqHeader) request.getHeader(CSeqHeader.NAME);
+
+        if (null == cSeqHeader) {
+            return -1;
+        }
+
+        return cSeqHeader.getSeqNumber();
     }
 
 }
