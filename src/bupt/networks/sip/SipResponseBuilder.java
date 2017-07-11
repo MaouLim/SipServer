@@ -25,9 +25,9 @@ public class SipResponseBuilder {
         this.sipUserAgent = sipUserAgent;
     }
 
-    public Response createOK(@NotNull Request request) throws ParseException {
+    public Response create(@NotNull Request request, int statusCode) throws ParseException {
         Response response =
-                sipFactoryHelper.getMessageFactory().createResponse(Response.OK, request);
+                sipFactoryHelper.getMessageFactory().createResponse(statusCode, request);
 
         Address contact = sipUserAgent.getContactAOR().getSipAddress();
         ContactHeader contactHeader = headerFactory.createContactHeader(contact);

@@ -7,6 +7,8 @@ import javax.sip.*;
  */
 public interface SipProcessor {
 
+    void processInvite(RequestEvent requestEvent);
+    void processBye(RequestEvent requestEvent);
     void processMessage(RequestEvent requestEvent);
     void processRegister(RequestEvent requestEvent);
     void processPublish(RequestEvent requestEvent);

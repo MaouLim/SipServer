@@ -299,8 +299,8 @@ public class SipRequestBuilder {
     }
 
     public Request createPublish(@NotNull SipContactAOR targetContactAOR,
-                                 String event,
-                                 String statusInfo) throws Exception {
+                                          String        event,
+                                          String        statusInfo) throws Exception {
         SipContactAOR selfContactAOR = sipUserAgent.getContactAOR();
 
         FromHeader fromHeader = headerFactory.createFromHeader(

@@ -7,6 +7,7 @@ import com.sun.istack.internal.NotNull;
 
 import javax.sip.*;
 import javax.sip.message.Request;
+import javax.sip.message.Response;
 import java.util.concurrent.ConcurrentHashMap;
 
 /*
@@ -17,8 +18,6 @@ public class ClientController implements SipProcessor, ChatClientService {
     public static final String INVITE_TO_CHAT = "INVITE_TO_CHAT";
 
     private SipUserAgent       userAgent          = null;
-    private ClientTransaction  currentTransaction = null;
-    private Dialog             currentDialog      = null;
     private SipRequestBuilder  requestBuilder     = null;
     private SipResponseBuilder responseBuilder    = null;
     private SipContactAOR      serverAOR          = null;
@@ -93,11 +92,19 @@ public class ClientController implements SipProcessor, ChatClientService {
     }
 
     @Override
+    public void processInvite(RequestEvent requestEvent) {
+
+    }
+
+    @Override
+    public void processBye(RequestEvent requestEvent) { }
+
+    @Override
     public void processMessage(RequestEvent requestEvent) {
         ServerTransaction transaction = requestEvent.getServerTransaction();
         try {
             // todo something like updating ui components
-            transaction.sendResponse(responseBuilder.createOK(transaction.getRequest()));
+            transaction.sendResponse(responseBuilder.create(transaction.getRequest(), Response.OK));
         }
         catch (Exception ex) {
             ex.printStackTrace();
@@ -107,21 +114,17 @@ public class ClientController implements SipProcessor, ChatClientService {
     }
 
     @Override
-    public void processRegister(RequestEvent requestEvent) {
-        // empty
-    }
+    public void processRegister(RequestEvent requestEvent) { }
 
     @Override
-    public void processPublish(RequestEvent requestEvent) {
-        // empty
-    }
+    public void processPublish(RequestEvent requestEvent) { }
 
     @Override
     public void processNotifier(RequestEvent requestEvent) {
         ServerTransaction transaction = requestEvent.getServerTransaction();
         try {
             // todo something like updating ui components
-            transaction.sendResponse(responseBuilder.createOK(transaction.getRequest()));
+            transaction.sendResponse(responseBuilder.create(transaction.getRequest(), Response.OK));
         }
         catch (Exception ex) {
             ex.printStackTrace();
@@ -129,9 +132,7 @@ public class ClientController implements SipProcessor, ChatClientService {
     }
 
     @Override
-    public void processSubscribe(RequestEvent requestEvent) {
-        // empty
-    }
+    public void processSubscribe(RequestEvent requestEvent) { }
 
     @Override
     public void processResponse(ResponseEvent responseEvent) {
@@ -182,7 +183,6 @@ public class ClientController implements SipProcessor, ChatClientService {
     @Override
     public void sendMessage(String contactURI, String content) {
         try {
-            // send message to
             Request request = requestBuilder.createMessage(new SipContactAOR(contactURI), content);
             ClientTransaction transaction = userAgent.sendRequestByTransaction(request);
             clientTransactionMap.put(SipRequestBuilder.getRequestCSeq(request), transaction);
@@ -194,16 +194,30 @@ public class ClientController implements SipProcessor, ChatClientService {
 
     @Override
     public void createChannel(String channelId) {
-
+        try {
+            Request request = requestBuilder.createSubscribe(serverAOR, channelId);
+            ClientTransaction transaction = userAgent.sendRequestByTransaction(request);
+            clientTransactionMap.put(SipRequestBuilder.getRequestCSeq(request), transaction);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
     public void subscribeChannel(String channelId) {
-
+        createChannel(channelId);
     }
 
     @Override
     public void publishToChannel(String channelId, String statusInfo) {
-
+        try {
+            Request request = requestBuilder.createPublish(serverAOR, channelId, statusInfo);
+            ClientTransaction transaction = userAgent.sendRequestByTransaction(request);
+            clientTransactionMap.put(SipRequestBuilder.getRequestCSeq(request), transaction);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

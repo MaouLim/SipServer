@@ -27,6 +27,24 @@ public abstract class ConnectionManager
         this.communicatorMap = new ConcurrentHashMap<>();
     }
 
+    public void start() {
+        TCPHelper.startListener(this);
+    }
+
+    public void stop() {
+        super.close();
+    }
+
+    public void dispatch(String targetCommunicatorId, MessageBase message) {
+        communicatorMap.computeIfPresent(
+                targetCommunicatorId,
+                (s, communicator) -> {
+                    communicator.send(message.toString());
+                    return communicator;
+                }
+        );
+    }
+
     @Override
     public void handleConnectionEstablished(Socket socket, Object sender) {
 
@@ -39,9 +57,12 @@ public abstract class ConnectionManager
 
                 String identifier = socket.getRemoteSocketAddress().toString();
 
-                if (communicatorMap.containsKey(identifier)) {
-                    communicatorMap.remove(identifier);
+                Communicator removed = communicatorMap.remove(identifier);
+                if (null == removed) {
+                    return;
                 }
+                removed.close();
+                System.err.println("connection<" + identifier + "> has been removed");
             }
 
             @Override

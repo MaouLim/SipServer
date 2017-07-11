@@ -24,11 +24,11 @@ public class SipContactAOR {
         this.port = port;
         this.sipAOR = sipAOR;
 
-        if (null == this.sipAOR) {
-            return;
-        }
-
-        assert (this.userName.equals(this.sipAOR.getUserName()));
+//        if (null == this.sipAOR) {
+//           return;
+//        }
+//
+//        assert (this.userName.equals(this.sipAOR.getUserName()));
     }
 
     public SipContactAOR(String userName, String address, int port) {
@@ -52,9 +52,9 @@ public class SipContactAOR {
     }
 
     public boolean attachTo(@NotNull SipAOR sipAOR) {
-        if (!this.userName.equals(sipAOR.getUserName())) {
-            return false;
-        }
+//        if (!this.userName.equals(sipAOR.getUserName())) {
+//            return false;
+//        }
 
         this.sipAOR = sipAOR;
         return true;
