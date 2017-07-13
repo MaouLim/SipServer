@@ -2,6 +2,8 @@ package bupt.sipchat.server;
 
 import bupt.networks.sip.*;
 import bupt.networks.sip.exceptions.InitFailureException;
+import bupt.sipchat.dao.AuthenticationService;
+import bupt.sipchat.dao.impl.AuthenticationDao;
 import bupt.util.Configuration;
 import bupt.util.LogUtil;
 
@@ -49,16 +51,11 @@ public class ServerController implements SipProcessor {
         Configuration sipConfig = new Configuration(sipConfigURL);
         Configuration serverConfig = new Configuration(serverConfigURL);
 
-        SipAOR sipAOR = new SipAOR(
-                (String) serverConfig.get(SERVER_NAME),
-                (String) serverConfig.get(SERVER_DOMAIN)
-        );
-
         SipContactAOR contactAOR = new SipContactAOR(
                 (String) serverConfig.get(SERVER_NAME),
                 (String) sipConfig.get(IP_ADDRESS),
                 (Integer) serverConfig.get(SERVER_PORT),
-                sipAOR
+                SERVER_SIP_AOR
         );
 
         try {
@@ -260,15 +257,23 @@ public class ServerController implements SipProcessor {
             }
 
             contactMap.forEach((sipURI, contactAOR) -> {
-                ContactHeader contactHeader = helper.getHeaderFactory().
-                        createContactHeader(agent.getContactAOR().getSipAddress());
-                request.setRequestURI(contactAOR.getSipURI());
-                request.setHeader(contactHeader);
-
                 try {
-                    agent.sendRequestByTransaction(request);
+                    FromHeader fromHeader = (FromHeader) request.getHeader(FromHeader.NAME);
+
+                    if (sipURI.equals(fromHeader.getAddress().getURI().toString())) {
+                        return;
+                    }
+                    String content = new String(request.getRawContent());
+                    ToHeader toHeader = (ToHeader) request.getHeader(ToHeader.NAME);
+
+                    Request forward = requestBuilder.createMessage(contactAOR, content);
+                    forward.setHeader(fromHeader);
+                    forward.setHeader(toHeader);
+                    agent.sendRequestByTransaction(forward);
+
+                    LogUtil.lumpedLog("Forward Sent", forward.toString(), false);
                 }
-                catch (SipException ex) {
+                catch (Exception ex) {
                     ex.printStackTrace();
                 }
             });
@@ -318,10 +323,19 @@ public class ServerController implements SipProcessor {
 
     @Override
     public void processRegister(Request request, ServerTransaction transaction) {
-        String contactURI =
-                ((ContactHeader) request.getHeader(ContactHeader.NAME)).getAddress().getURI().toString();
+
         String toURI =
                 ((ToHeader) request.getHeader(ToHeader.NAME)).getAddress().getURI().toString();
+
+        if (request.getExpires().getExpires() <= 0) {
+            contactMap.remove(toURI);
+
+            LogUtil.lumpedLog("User Removed", toURI, true);
+            return;
+        }
+
+        String contactURI =
+                ((ContactHeader) request.getHeader(ContactHeader.NAME)).getAddress().getURI().toString();
 
         SipContactAOR contactAOR = new SipContactAOR(contactURI);
         contactAOR.attachTo(new SipAOR(toURI));
@@ -335,6 +349,23 @@ public class ServerController implements SipProcessor {
             catch (Exception ex) {
                 ex.printStackTrace();
             }
+            return;
+        }
+
+        // todo query
+        String toBeCertified = new String(request.getRawContent());
+        AuthenticationService authentication = new AuthenticationDao();
+        String password = authentication.queryPassword(new SipAOR(toURI).getUserName());
+
+        if (null == password || !toBeCertified.equals(password)) {
+            try {
+                transaction.sendResponse(responseBuilder.create(request, Response.UNAUTHORIZED));
+                LogUtil.lumpedLog("Response Sent", "UNAUTHORIZED <register>", false);
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
             return;
         }
 
@@ -394,9 +425,6 @@ public class ServerController implements SipProcessor {
 
                             SubscriptionStateHeader subscriptionStateHeader = helper.getHeaderFactory().
                                     createSubscriptionStateHeader(SubscriptionStateHeader.ACTIVE);
-//                            ContactHeader contactHeader =
-//                                    SipFactoryHelper.getInstance().getHeaderFactory().
-//                                            createContactHeader(agent.getContactAOR().getSipAddress());
 
                             ContentTypeHeader contentTypeHeader = helper.getHeaderFactory().
                                     createContentTypeHeader("text", "plain");

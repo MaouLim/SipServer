@@ -20,9 +20,9 @@ public class ConnectionPool {
     private static final Configuration
             DB_CONFIG = new Configuration("res/db-config.yml");
 
-    static final String URL = (String) DB_CONFIG.get("URL");
-    static final String ACCOUNT = (String) DB_CONFIG.get("ACCOUNT");
-    static final String PASSWORD = (String) DB_CONFIG.get("PASSWORD");
+    static final String URL = (String) DB_CONFIG.get("url");
+    static final String ACCOUNT = (String) DB_CONFIG.get("account");
+    static final String PASSWORD = (String) DB_CONFIG.get("password");
     static final int INIT_CONNECTIONS = (Integer) DB_CONFIG.get("init_connections");
     static final int CORE_CONNECTIONS = (Integer) DB_CONFIG.get("core_connections");
 
@@ -60,7 +60,6 @@ public class ConnectionPool {
 
     public synchronized void setIdles(SoftConnection connection) {
         occupies.remove(connection.getHandle());
-
 
         if (CORE_CONNECTIONS <= idles.size()) {
             connection.close();

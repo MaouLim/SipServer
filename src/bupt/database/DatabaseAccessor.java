@@ -9,15 +9,17 @@ public class DatabaseAccessor {
 
     private ConnectionPool pool = null;
 
-    public DatabaseAccessor() {
-        pool = ConnectionPool.getInstance();
+    private static DatabaseAccessor accessor = null;
+
+    public static DatabaseAccessor getInstance() {
+        if (null == accessor) {
+            accessor = new DatabaseAccessor();
+        }
+
+        return accessor;
     }
 
-    public List<Object> executeQuery(String actionName, Object... args) {
-        return null;
-    }
-
-    private List<Object> execute(Query action) {
+    public List<Object> execute(Query action) {
         SoftConnection connection = null;
         try {
             connection = pool.getConnection();
@@ -27,12 +29,14 @@ public class DatabaseAccessor {
             ex.printStackTrace();
         }
         finally {
-            connection.release();
+            if (null != connection) {
+                connection.release();
+            }
         }
         return null;
     }
 
-    private int execute(Update action) {
+    public int execute(Update action) {
         SoftConnection connection = null;
         try {
             connection = pool.getConnection();
@@ -42,8 +46,14 @@ public class DatabaseAccessor {
             ex.printStackTrace();
         }
         finally {
-            connection.release();
+            if (null != connection) {
+                connection.release();
+            }
         }
         return 0;
+    }
+
+    private DatabaseAccessor() {
+        pool = ConnectionPool.getInstance();
     }
 }

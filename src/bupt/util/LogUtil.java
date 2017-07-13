@@ -10,7 +10,8 @@ public class LogUtil {
 
     private static AtomicLong atomicLong = new AtomicLong(0);
 
-    public static void lumpedLog(String title, String info, boolean emergent) {
+    public static synchronized void
+        lumpedLog(String title, String info, boolean emergent) {
 
         PrintStream printStream = emergent ? System.err : System.out;
         long seq = atomicLong.getAndIncrement();

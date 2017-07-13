@@ -1,6 +1,6 @@
 {
     "driver": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://127.0.0.1:3306/mydb",
+    "url": "jdbc:mysql://10.209.6.9:3306/userinformation",
     "account": "ty",
     "password": "3856",
     "init_connections": 2,
