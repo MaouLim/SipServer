@@ -25,15 +25,7 @@ import javax.sip.TransportNotSupportedException;
 import javax.sip.address.Address;
 import javax.sip.address.AddressFactory;
 import javax.sip.address.SipURI;
-import javax.sip.header.CSeqHeader;
-import javax.sip.header.CallIdHeader;
-import javax.sip.header.ContactHeader;
-import javax.sip.header.ContentTypeHeader;
-import javax.sip.header.FromHeader;
-import javax.sip.header.HeaderFactory;
-import javax.sip.header.MaxForwardsHeader;
-import javax.sip.header.ToHeader;
-import javax.sip.header.ViaHeader;
+import javax.sip.header.*;
 import javax.sip.message.MessageFactory;
 import javax.sip.message.Request;
 import javax.sip.message.Response;
@@ -119,13 +111,16 @@ public class SipLayer implements SipListener {
         CallIdHeader callIdHeader = sipProvider.getNewCallId();
 
         CSeqHeader cSeqHeader = headerFactory.createCSeqHeader(1,
-                Request.MESSAGE);
+                Request.NOTIFY);
 
         MaxForwardsHeader maxForwards = headerFactory
                 .createMaxForwardsHeader(70);
 
+        SubscriptionStateHeader subscriptionStateHeader =
+                headerFactory.createSubscriptionStateHeader(SubscriptionStateHeader.ACTIVE);
+
         Request request = messageFactory.createRequest(requestURI,
-                Request.MESSAGE, callIdHeader, cSeqHeader, fromHeader,
+                Request.NOTIFY, callIdHeader, cSeqHeader, fromHeader,
                 toHeader, viaHeaders, maxForwards);
 
         SipURI contactURI = addressFactory.createSipURI(getUsername(),
@@ -136,6 +131,7 @@ public class SipLayer implements SipListener {
         ContactHeader contactHeader = headerFactory
                 .createContactHeader(contactAddress);
         request.addHeader(contactHeader);
+        request.addHeader(subscriptionStateHeader);
 
         ContentTypeHeader contentTypeHeader = headerFactory
                 .createContentTypeHeader("text", "plain");
@@ -149,6 +145,9 @@ public class SipLayer implements SipListener {
      */
     public void processResponse(ResponseEvent evt) {
         Response response = evt.getResponse();
+
+        System.out.println(response.toString());
+
         int status = response.getStatusCode();
 
         if ((status >= 200) && (status < 300)) { //Success!

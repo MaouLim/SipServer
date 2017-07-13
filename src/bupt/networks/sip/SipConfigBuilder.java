@@ -36,9 +36,10 @@ public class SipConfigBuilder {
         }
         else {
             try {
+                System.out.println(InetAddress.getLocalHost().getHostAddress());
+
                 properties.setProperty(
                     PROPERTY_IP_ADDRESS,
-                    //Inet4Address.getLocalHost().getHostAddress()
                     InetAddress.getLocalHost().getHostAddress()
                 );
             }

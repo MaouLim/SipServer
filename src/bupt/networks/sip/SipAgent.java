@@ -40,6 +40,10 @@ public abstract class SipAgent implements SipListener {
         this.sipProvider.addSipListener(this);
     }
 
+    public void close() {
+        sipStack.stop();
+    }
+
     public SipProvider getSipProvider() {
         return sipProvider;
     }
@@ -54,6 +58,16 @@ public abstract class SipAgent implements SipListener {
 
     public String getTransport() {
         return transport;
+    }
+
+    public ClientTransaction createClientTransaction(Request request)
+            throws TransactionUnavailableException {
+        return sipProvider.getNewClientTransaction(request);
+    }
+
+    public ServerTransaction createServerTransaction(Request request)
+            throws TransactionAlreadyExistsException, TransactionUnavailableException {
+        return sipProvider.getNewServerTransaction(request);
     }
 
 //    public ClientTransaction

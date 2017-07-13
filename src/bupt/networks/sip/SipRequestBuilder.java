@@ -2,6 +2,7 @@ package bupt.networks.sip;
 
 import com.sun.istack.internal.NotNull;
 
+import javax.sip.Dialog;
 import javax.sip.address.Address;
 import javax.sip.address.AddressFactory;
 import javax.sip.address.SipURI;
@@ -114,6 +115,8 @@ public class SipRequestBuilder {
 
     public Request createMessage(@NotNull SipContactAOR targetContactAOR, String content) throws Exception {
         SipContactAOR selfContactAOR = sipUserAgent.getContactAOR();
+
+        System.err.println(selfContactAOR.getSipAOR().getSipAddress().toString() + "\n" + selfContactAOR.getUserName());
 
         FromHeader fromHeader = headerFactory.createFromHeader(
                 selfContactAOR.getSipAOR().getSipAddress(),
@@ -286,14 +289,19 @@ public class SipRequestBuilder {
                 headerFactory.createContentTypeHeader("text", "plain");
         EventHeader eventHeader = headerFactory.createEventHeader(event);
 
+        SubscriptionStateHeader subscriptionStateHeader =
+                headerFactory.createSubscriptionStateHeader(SubscriptionStateHeader.ACTIVE);
+
         final Request request = sipFactoryHelper.getMessageFactory().createRequest(
                 requestURI, Request.NOTIFY, callIdHeader, cSeqHeader,
                 fromHeader, toHeader, viaHeaders, maxForwardsHeader
         );
+        //final Request request = dialog.createRequest(Request.NOTIFY);
 
         request.addHeader(contactHeader);
         request.addHeader(eventHeader);
         request.setContent(statusInfo, contentTypeHeader);
+        request.addHeader(subscriptionStateHeader);
 
         return request;
     }
@@ -344,6 +352,45 @@ public class SipRequestBuilder {
         request.addHeader(eventHeader);
         request.setContent(statusInfo, contentTypeHeader);
         request.addHeader(routeHeader);
+
+        return request;
+    }
+
+    public Request createAck(SipContactAOR targetContactAOR) throws Exception {
+        SipContactAOR selfContactAOR = sipUserAgent.getContactAOR();
+
+        FromHeader fromHeader = headerFactory.createFromHeader(
+                selfContactAOR.getSipAOR().getSipAddress(),
+                selfContactAOR.getUserName()
+        );
+        ToHeader toHeader =
+                headerFactory.createToHeader(targetContactAOR.getSipAOR().getSipAddress(), null);
+
+        SipURI requestURI = targetContactAOR.getSipURI();
+        requestURI.setTransportParam(sipUserAgent.getTransport());
+        ContactHeader contactHeader =
+                headerFactory.createContactHeader(selfContactAOR.getSipAddress());
+
+        List<ViaHeader> viaHeaders = new ArrayList<ViaHeader>();
+        ViaHeader viaHeader = headerFactory.createViaHeader(
+                sipUserAgent.getAddress(),
+                sipUserAgent.getPort(),
+                sipUserAgent.getTransport(),
+                null
+        );
+        viaHeaders.add(viaHeader);
+
+        CallIdHeader callIdHeader = sipUserAgent.getSipProvider().getNewCallId();
+        MaxForwardsHeader maxForwardsHeader = headerFactory.createMaxForwardsHeader(70);
+        CSeqHeader cSeqHeader =
+                headerFactory.createCSeqHeader(sequence.getAndIncrement(), Request.ACK);
+
+        final Request request = sipFactoryHelper.getMessageFactory().createRequest(
+                requestURI, Request.ACK, callIdHeader, cSeqHeader,
+                fromHeader, toHeader, viaHeaders, maxForwardsHeader
+        );
+
+        request.addHeader(contactHeader);
 
         return request;
     }

@@ -4,6 +4,7 @@ import com.sun.istack.internal.NotNull;
 
 import javax.sip.address.Address;
 import javax.sip.address.AddressFactory;
+import javax.sip.header.CSeqHeader;
 import javax.sip.header.ContactHeader;
 import javax.sip.header.HeaderFactory;
 import javax.sip.message.Request;
@@ -34,5 +35,15 @@ public class SipResponseBuilder {
         response.addHeader(contactHeader);
 
         return response;
+    }
+
+    public static long getResponseCSeq(Response response) {
+        CSeqHeader cSeqHeader = (CSeqHeader) response.getHeader(CSeqHeader.NAME);
+
+        if (null == cSeqHeader) {
+            return -1;
+        }
+
+        return cSeqHeader.getSeqNumber();
     }
 }

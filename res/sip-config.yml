@@ -1,5 +1,6 @@
 {
     "javax.sip.STACK_NAME": "mySipStack",
+    "javax.sip.IP_ADDRESS": "10.209.13.116",
     "gov.nist.javax.sip.TRACE_LEVEL": "32",
     "gov.nist.javax.sip.SERVER_LOG": "server.log",
     "gov.nist.javax.sip.DEBUG_LOG": "debug.log"
